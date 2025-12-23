@@ -1,205 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abhijeet Kumar Pandey - Cyber Security Analyst</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      background: #f3f4f6;
-      color: #111827;
-      line-height: 1.6;
-    }
-    header {
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
-      color: white;
-      text-align: center;
-      padding: 3rem 1rem 5rem;
-    }
-    header img {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      border: 4px solid white;
-      margin-bottom: 1rem;
-      object-fit: cover;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-    }
-    header p {
-      margin-top: 0.4rem;
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      background: white;
-      padding: 0.8rem;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    nav a {
-      color: #2563eb;
-      font-weight: 500;
-      margin: 0 1rem;
-      text-decoration: none;
-    }
-    section {
-      padding: 4rem 1rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #1d4ed8;
-      font-size: 1.8rem;
-    }
-    .skills, .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: linear-gradient(135deg, #f9fafb, #e5e7eb);
-      padding: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    }
-    .btn {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    footer {
-      text-align: center;
-      background: #111827;
-      color: white;
-      padding: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abhijeet Pandey | Security Researcher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary-bg: #0a0b10;
+            --secondary-bg: #11141d;
+            --accent-color: #00f2ff; /* Cyber Blue */
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(0, 242, 255, 0.2);
+            --danger: #ff4757;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            font-family: 'Fira Code', 'Segoe UI', monospace;
+            overflow-x: hidden;
+        }
+
+        /* --- Background Matrix Effect --- */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* --- Navigation --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 10%;
+            background: rgba(10, 11, 16, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* --- Hero Section --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+
+        .glitch-wrapper {
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .typing-text {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            border-right: 2px solid var(--accent-color);
+            padding-right: 5px;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent-color); } }
+
+        /* --- Section Styling --- */
+        section {
+            padding: 100px 10%;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: var(--border-color);
+        }
+
+        /* --- Skills Grid --- */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-node {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 4px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-node:hover {
+            background: rgba(0, 242, 255, 0.05);
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .skill-node i {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        /* --- Experience Timeline --- */
+        .timeline {
+            border-left: 2px solid var(--border-color);
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .timeline-item {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -41px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .exp-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .exp-card:hover {
+            border-color: var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .date-tag {
+            color: var(--accent-color);
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Contact --- */
+        .contact-box {
+            background: var(--secondary-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-icons {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .social-icons a {
+            font-size: 2rem;
+            color: var(--text-dim);
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        .btn-cyber {
+            padding: 12px 30px;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: 0.3s;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .btn-cyber:hover {
+            background: var(--accent-color);
+            color: var(--primary-bg);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+
+        footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
 
 <body>
+    <canvas id="canvas-container"></canvas>
 
-<header>
-  <img src="profile.jpg" alt="Abhijeet Kumar Pandey">
-  <h1>Abhijeet Kumar Pandey</h1>
-  <p>Cyber Security Analyst | Web & API Security | OWASP Top 10</p>
-  <a href="resume.pdf" class="btn" download>📄 Download Resume</a>
-</header>
+    <nav>
+        <div class="logo">A.Pandey <span style="color:var(--danger)">_</span></div>
+        <div class="nav-links">
+            <a href="#about">01. About</a>
+            <a href="#skills">02. Skills</a>
+            <a href="#experience">03. Experience</a>
+            <a href="#contact">04. Contact</a>
+        </div>
+    </nav>
 
-<nav>
-  <a href="#about">About</a>
-  <a href="#skills">Skills</a>
-  <a href="#experience">Experience</a>
-  <a href="#projects">Projects</a>
-  <a href="#contact">Contact</a>
-</nav>
+    <header>
+        <div class="glitch-wrapper">
+            [cite_start]<h1>Abhijeet Pandey [cite: 1]</h1>
+        </div>
+        <p><span class="typing-text">Cyber Security Analyst | Web Pentester | [cite_start]M.Tech (CSE)</span> [cite: 5, 9]</p>
+        <a href="#" class="btn-cyber">Initialise Terminal</a>
+    </header>
 
-<section id="about">
-  <h2>About Me</h2>
-  <p style="text-align:center; max-width: 800px; margin:auto;">
-    Cyber Security Analyst with hands-on experience in Web Application Security,
-    API Security, and Vulnerability Assessment.  
-    M.Tech (CSE) candidate with strong expertise in OWASP Top 10, penetration testing,
-    secure SDLC practices, and security reporting.  
-    Proven ability to identify, validate, and remediate real-world security vulnerabilities.
-  </p>
-</section>
+    <section id="about">
+        <h2>About_Me</h2>
+        <div style="max-width: 800px; line-height: 1.8; color: var(--text-dim);">
+            [cite_start]<p>Specializing in <strong>Web Application Security</strong> and <strong>API Penetration Testing</strong>[cite: 5]. 
+            [cite_start]Currently pursuing M.Tech at AKTU with a focus on Intelligent Intrusion Detection systems[cite: 11, 35]. 
+            [cite_start]I bridge the gap between development and security by identifying critical vulnerabilities before they are exploited[cite: 7].</p>
+        </div>
+    </section>
 
-<section id="skills">
-  <h2>Core Technical Skills</h2>
-  <div class="skills">
-    <div class="card">OWASP Top 10</div>
-    <div class="card">Web & API VAPT</div>
-    <div class="card">Burp Suite</div>
-    <div class="card">OWASP ZAP</div>
-    <div class="card">Nmap & Nikto</div>
-    <div class="card">Metasploit</div>
-    <div class="card">Postman (API Testing)</div>
-    <div class="card">Network Security (TCP/IP, HTTP/HTTPS)</div>
-    <div class="card">Python (Security Automation)</div>
-    <div class="card">Linux & Windows</div>
-  </div>
-</section>
+    <section id="skills">
+        <h2>Technical_Arsenal</h2>
+        <div class="skills-container">
+            <div class="skill-node">
+                <i class="fas fa-shield-virus"></i>
+                [cite_start]<h3>OWASP Top 10 [cite: 15]</h3>
+                <p>XSS, SQLi, IDOR, SSRF</p>
+            </div>
+            <div class="skill-node">
+                <i class="fas fa-bug"></i>
+                [cite_start]<h3>VAPT [cite: 15]</h3>
+                <p>Manual & Automated testing</p>
+            </div>
+            <div class="skill-node">
+                <i class="fas fa-terminal"></i>
+                [cite_start]<h3>Tools [cite: 15]</h3>
+                <p>Burp Suite, ZAP, Metasploit</p>
+            </div>
+            <div class="skill-node">
+                <i class="fas fa-code"></i>
+                [cite_start]<h3>Scripting [cite: 18]</h3>
+                <p>Python Automation, Bash</p>
+            </div>
+        </div>
+    </section>
 
-<section id="experience">
-  <h2>Professional Experience</h2>
-  <div class="projects">
-    <div class="card">
-      <h3>Cyber Security Analyst</h3>
-      <p><strong>INTERCERT INC</strong> — Oct 2025 – Present</p>
-      <ul>
-        <li>Conducting Web Application & API VAPT aligned with OWASP Top 10</li>
-        <li>Manual and automated testing using Burp Suite, Nmap, ZAP, Postman</li>
-        <li>Validating vulnerabilities with PoC and remediation guidance</li>
-      </ul>
-    </div>
+    <section id="experience">
+        <h2>History_Logs</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="exp-card">
+                    [cite_start]<span class="date-tag">OCT 2025 - PRESENT [cite: 26]</span>
+                    <h3>Cyber Security Analyst</h3>
+                    [cite_start]<p style="color: var(--accent-color)">INTERCERT INC [cite: 21]</p>
+                    <ul style="margin-top: 10px; color: var(--text-dim); font-size: 0.9rem;">
+                        [cite_start]<li>Conducted full-scale Web & API VAPT[cite: 27].</li>
+                        [cite_start]<li>Automated vulnerability scanning workflows[cite: 28].</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="exp-card">
+                    [cite_start]<span class="date-tag">JUL 2024 - OCT 2025 [cite: 50]</span>
+                    <h3>Cyber Security Analyst</h3>
+                    [cite_start]<p style="color: var(--accent-color)">SSQS [cite: 31]</p>
+                    [cite_start]<p style="color: var(--text-dim); font-size: 0.9rem;">Enterprise-grade penetration testing for mission-critical applications[cite: 32].</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-      <h3>Cyber Security Analyst</h3>
-      <p><strong>SSQS</strong> — Jul 2024 – Oct 2025</p>
-      <ul>
-        <li>Performed enterprise Web & API penetration testing</li>
-        <li>Tested authentication, authorization, session management</li>
-        <li>Prepared technical security assessment reports</li>
-      </ul>
-    </div>
-  </div>
-</section>
+    <section id="contact">
+        <div class="contact-box">
+            <h2>Establish_Connection</h2>
+            <p>Ready to secure your infrastructure?</p>
+            [cite_start]<a href="mailto:abhijeet.kr.pandey.07@gmail.com" class="btn-cyber">Send Encrypted Mail [cite: 4]</a>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-user-secret"></i></a>
+            </div>
+        </div>
+    </section>
 
-<section id="projects">
-  <h2>Security Projects</h2>
-  <div class="projects">
-    <div class="card">
-      <h3>Intelligent Intrusion Detection System</h3>
-      <p>
-        M.Tech Research Project using hybrid ML/DL models for intrusion detection.
-        Analyzed network traffic datasets to identify malicious behavior.
-      </p>
-    </div>
+    <footer>
+        &copy; 2025 ABHIJEET PANDEY // SECURE_PORTFOLIO_V2.0
+    </footer>
 
-    <div class="card">
-      <h3>Web Application Security Labs</h3>
-      <p>
-        Hands-on labs covering OWASP Top 10 vulnerabilities including
-        XSS, SQL Injection, CSRF, IDOR, SSRF, and Authentication flaws.
-      </p>
-    </div>
-  </div>
-</section>
+    <script>
+        // Matrix Background Script
+        const canvas = document.getElementById('canvas-container');
+        const ctx = canvas.getContext('2d');
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p style="text-align:center;">
-    Email: <a href="mailto:abhijeet.kr.pandey.07@gmail.com">abhijeet.kr.pandey.07@gmail.com</a><br>
-    Phone: +91 6386569211
-  </p>
-  <p style="text-align:center;">
-    <a href="https://www.linkedin.com/in/abhitech07" target="_blank"><i class="fab fa-linkedin"></i></a>
-    &nbsp;
-    <a href="https://github.com/abhitech07" target="_blank"><i class="fab fa-github"></i></a>
-  </p>
-</section>
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-<footer>
-  © 2025 Abhijeet Kumar Pandey. All rights reserved.
-</footer>
+        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^";
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
 
+        function draw() {
+            ctx.fillStyle = "rgba(10, 11, 16, 0.05)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#00f2ff";
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
