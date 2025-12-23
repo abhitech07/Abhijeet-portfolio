@@ -1,275 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Abhijeet Pandey | Security Researcher</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhijeet Kumar Pandey | Cyber Security Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-bg: #0a0b10;
-            --secondary-bg: #11141d;
-            --accent-color: #00f2ff; /* Cyber Blue */
-            --text-main: #e2e8f0;
-            --text-dim: #94a3b8;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --border-color: rgba(0, 242, 255, 0.2);
-            --danger: #ff4757;
+            --bg-dark: #050505;
+            --terminal-green: #00ff41;
+            --cyber-blue: #00f2ff;
+            --text-gray: #a8b2d1;
+            --border-glow: rgba(0, 242, 255, 0.3);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Fira Code', 'Courier New', monospace; }
+        body { background-color: var(--bg-dark); color: white; overflow-x: hidden; }
 
-        body {
-            background-color: var(--primary-bg);
-            color: var(--text-main);
-            font-family: 'Fira Code', 'Segoe UI', monospace;
-            overflow-x: hidden;
-        }
-
-        /* --- Background Matrix Effect --- */
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-        }
+        /* --- Matrix Background --- */
+        #bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
 
         /* --- Navigation --- */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 10%;
-            background: rgba(10, 11, 16, 0.8);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-            border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 10%; background: rgba(5, 5, 5, 0.9);
+            border-bottom: 1px solid var(--border-glow); position: fixed; width: 100%; z-index: 100;
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent-color);
-            text-shadow: 0 0 10px var(--accent-color);
-        }
+        .logo { color: var(--cyber-blue); font-weight: bold; letter-spacing: 2px; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 2rem; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--cyber-blue); text-shadow: 0 0 8px var(--cyber-blue); }
 
         /* --- Hero Section --- */
         header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 1rem;
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; padding: 0 1rem;
         }
-
-        .glitch-wrapper {
-            position: relative;
+        h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); margin-bottom: 10px; color: #fff; text-transform: uppercase; }
+        .subtitle { font-size: 1.2rem; color: var(--cyber-blue); margin-bottom: 2rem; }
+        
+        .terminal-btn {
+            padding: 12px 35px; border: 1px solid var(--cyber-blue); color: var(--cyber-blue);
+            text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            transition: 0.4s; background: transparent; cursor: pointer;
         }
+        .terminal-btn:hover { background: var(--cyber-blue); color: var(--bg-dark); box-shadow: 0 0 20px var(--cyber-blue); }
 
-        header h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #fff, var(--accent-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* --- Content Sections --- */
+        section { padding: 100px 10%; }
+        h2 { font-size: 2rem; color: var(--cyber-blue); margin-bottom: 30px; border-left: 4px solid var(--cyber-blue); padding-left: 15px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .card {
+            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-glow);
+            padding: 2rem; border-radius: 4px; transition: 0.3s;
         }
+        .card:hover { border-color: var(--cyber-blue); transform: translateY(-5px); background: rgba(0, 242, 255, 0.05); }
 
-        .typing-text {
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            border-right: 2px solid var(--accent-color);
-            padding-right: 5px;
-            animation: blink 0.75s step-end infinite;
-        }
+        .skill-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag { background: rgba(0, 242, 255, 0.1); border: 1px solid var(--cyber-blue); padding: 5px 12px; font-size: 0.8rem; color: var(--cyber-blue); }
 
-        @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--accent-color); } }
+        footer { text-align: center; padding: 3rem; border-top: 1px solid var(--border-glow); font-size: 0.8rem; color: var(--text-gray); }
 
-        /* --- Section Styling --- */
-        section {
-            padding: 100px 10%;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        h2::after {
-            content: "";
-            height: 1px;
-            flex-grow: 1;
-            background: var(--border-color);
-        }
-
-        /* --- Skills Grid --- */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-node {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            border-radius: 4px;
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill-node:hover {
-            background: rgba(0, 242, 255, 0.05);
-            transform: translateY(-5px);
-            border-color: var(--accent-color);
-        }
-
-        .skill-node i {
-            font-size: 2rem;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        /* --- Experience Timeline --- */
-        .timeline {
-            border-left: 2px solid var(--border-color);
-            padding-left: 30px;
-            position: relative;
-        }
-
-        .timeline-item {
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: "";
-            position: absolute;
-            left: -41px;
-            top: 5px;
-            width: 20px;
-            height: 20px;
-            background: var(--primary-bg);
-            border: 2px solid var(--accent-color);
-            border-radius: 50%;
-        }
-
-        .exp-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px;
-            border: 1px solid transparent;
-            transition: 0.3s;
-        }
-
-        .exp-card:hover {
-            border-color: var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .date-tag {
-            color: var(--accent-color);
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        /* --- Contact --- */
-        .contact-box {
-            background: var(--secondary-bg);
-            padding: 3rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-        }
-
-        .social-icons {
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-        }
-
-        .social-icons a {
-            font-size: 2rem;
-            color: var(--text-dim);
-            transition: 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: var(--accent-color);
-            transform: scale(1.2);
-        }
-
-        .btn-cyber {
-            padding: 12px 30px;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            transition: 0.3s;
-            margin-top: 20px;
-            display: inline-block;
-        }
-
-        .btn-cyber:hover {
-            background: var(--accent-color);
-            color: var(--primary-bg);
-            box-shadow: 0 0 20px var(--accent-color);
-        }
-
-        footer {
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            border-top: 1px solid var(--border-color);
-        }
-
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-        }
+        @media (max-width: 768px) { .nav-links { display: none; } }
     </style>
 </head>
-
 <body>
-    <canvas id="canvas-container"></canvas>
+    <canvas id="bg-canvas"></canvas>
 
     <nav>
-        <div class="logo">A.Pandey <span style="color:var(--danger)">_</span></div>
+        <div class="logo">A.K.PANDEY //_</div>
         <div class="nav-links">
             <a href="#about">01. About</a>
             <a href="#skills">02. Skills</a>
@@ -279,117 +78,113 @@
     </nav>
 
     <header>
-        <div class="glitch-wrapper">
-            [cite_start]<h1>Abhijeet Pandey [cite: 1]</h1>
-        </div>
-        <p><span class="typing-text">Cyber Security Analyst | Web Pentester | [cite_start]M.Tech (CSE)</span> [cite: 5, 9]</p>
-        <a href="#" class="btn-cyber">Initialise Terminal</a>
+        <h1>Abhijeet Kumar Pandey</h1>
+        <p class="subtitle">Cyber Security Analyst | Web Pentester | M.Tech (CSE)</p>
+        <a href="#about" class="terminal-btn">INITIALISE_LOGS</a>
     </header>
 
     <section id="about">
-        <h2>About_Me</h2>
-        <div style="max-width: 800px; line-height: 1.8; color: var(--text-dim);">
-            [cite_start]<p>Specializing in <strong>Web Application Security</strong> and <strong>API Penetration Testing</strong>[cite: 5]. 
-            [cite_start]Currently pursuing M.Tech at AKTU with a focus on Intelligent Intrusion Detection systems[cite: 11, 35]. 
-            [cite_start]I bridge the gap between development and security by identifying critical vulnerabilities before they are exploited[cite: 7].</p>
-        </div>
+        <h2>[01] Professional_Summary</h2>
+        <p style="color: var(--text-gray); line-height: 1.8; max-width: 900px;">
+            I am a specialized Cyber Security Analyst with a focus on **Web Application Security** and **API Vulnerability Assessments**[cite: 5]. 
+            Currently pursuing an **M.Tech in Computer Science** [cite: 9, 10], I combine academic research in **Intelligent Intrusion Detection** [cite: 35] 
+            with hands-on enterprise experience in identifying and remediating real-world vulnerabilities[cite: 7].
+        </p>
     </section>
 
     <section id="skills">
-        <h2>Technical_Arsenal</h2>
-        <div class="skills-container">
-            <div class="skill-node">
-                <i class="fas fa-shield-virus"></i>
-                [cite_start]<h3>OWASP Top 10 [cite: 15]</h3>
-                <p>XSS, SQLi, IDOR, SSRF</p>
+        <h2>[02] Technical_Arsenal</h2>
+        <div class="grid">
+            <div class="card">
+                <h3 style="margin-bottom:15px">Vulnerability Assessment</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">OWASP Top 10</span>
+                    <span class="skill-tag">API Security</span>
+                    <span class="skill-tag">VAPT</span>
+                    <span class="skill-tag">Manual Validation</span>
+                </div>
             </div>
-            <div class="skill-node">
-                <i class="fas fa-bug"></i>
-                [cite_start]<h3>VAPT [cite: 15]</h3>
-                <p>Manual & Automated testing</p>
-            </div>
-            <div class="skill-node">
-                <i class="fas fa-terminal"></i>
-                [cite_start]<h3>Tools [cite: 15]</h3>
-                <p>Burp Suite, ZAP, Metasploit</p>
-            </div>
-            <div class="skill-node">
-                <i class="fas fa-code"></i>
-                [cite_start]<h3>Scripting [cite: 18]</h3>
-                <p>Python Automation, Bash</p>
+            <div class="card">
+                <h3 style="margin-bottom:15px">Security Tooling</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Burp Suite</span>
+                    <span class="skill-tag">OWASP ZAP</span>
+                    <span class="skill-tag">Metasploit</span>
+                    <span class="skill-tag">Postman</span>
+                    <span class="skill-tag">Wireshark</span>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="experience">
-        <h2>History_Logs</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="exp-card">
-                    [cite_start]<span class="date-tag">OCT 2025 - PRESENT [cite: 26]</span>
-                    <h3>Cyber Security Analyst</h3>
-                    [cite_start]<p style="color: var(--accent-color)">INTERCERT INC [cite: 21]</p>
-                    <ul style="margin-top: 10px; color: var(--text-dim); font-size: 0.9rem;">
-                        [cite_start]<li>Conducted full-scale Web & API VAPT[cite: 27].</li>
-                        [cite_start]<li>Automated vulnerability scanning workflows[cite: 28].</li>
-                    </ul>
-                </div>
+        <h2>[03] History_Logs</h2>
+        <div class="card" style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <h3 style="color: var(--cyber-blue);">INTERCERT INC</h3>
+                <span>Oct 2025 - Present</span>
             </div>
-            <div class="timeline-item">
-                <div class="exp-card">
-                    [cite_start]<span class="date-tag">JUL 2024 - OCT 2025 [cite: 50]</span>
-                    <h3>Cyber Security Analyst</h3>
-                    [cite_start]<p style="color: var(--accent-color)">SSQS [cite: 31]</p>
-                    [cite_start]<p style="color: var(--text-dim); font-size: 0.9rem;">Enterprise-grade penetration testing for mission-critical applications[cite: 32].</p>
-                </div>
+            <p><strong>Cyber Security Analyst</strong></p>
+            <ul style="margin-top: 15px; color: var(--text-gray); font-size: 0.9rem; padding-left: 20px;">
+                <li>Conducting Web Application and API Vulnerability Assessments[cite: 27].</li>
+                <li>Performing manual and automated testing using Burp Suite and Postman[cite: 28].</li>
+                <li>Validating and documenting vulnerabilities with Proof-of-Concept[cite: 29].</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <h3 style="color: var(--cyber-blue);">SSQS</h3>
+                <span>Jul 2024 - Oct 2025</span>
             </div>
+            <p><strong>Cyber Security Analyst</strong></p>
+            <p style="margin-top: 10px; color: var(--text-gray); font-size: 0.9rem;">
+                Executed penetration testing for enterprise applications, focusing on authentication and access control[cite: 32].
+            </p>
         </div>
     </section>
 
     <section id="contact">
-        <div class="contact-box">
+        <div style="text-align: center; border: 1px solid var(--cyber-blue); padding: 4rem 2rem;">
             <h2>Establish_Connection</h2>
-            <p>Ready to secure your infrastructure?</p>
-            [cite_start]<a href="mailto:abhijeet.kr.pandey.07@gmail.com" class="btn-cyber">Send Encrypted Mail [cite: 4]</a>
-            <div class="social-icons">
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-github"></i></a>
-                <a href="#"><i class="fas fa-user-secret"></i></a>
+            <p style="margin-bottom: 2rem;">Securely transmit inquiries to the following terminal:</p>
+            <p style="font-size: 1.2rem; color: var(--cyber-blue);">abhijeet.kr.pandey.07@gmail.com</p>
+            <p style="margin-top: 1rem;">Phone: +91 6386569211</p>
+            <div style="margin-top: 2rem; font-size: 2rem;">
+                <i class="fab fa-linkedin" style="margin: 0 15px; cursor: pointer;"></i>
+                <i class="fab fa-github" style="margin: 0 15px; cursor: pointer;"></i>
             </div>
         </div>
     </section>
 
     <footer>
-        &copy; 2025 ABHIJEET PANDEY // SECURE_PORTFOLIO_V2.0
+        &copy; 2025 ABHIJEET KUMAR PANDEY // SECURED ACCESS ONLY
     </footer>
 
     <script>
-        // Matrix Background Script
-        const canvas = document.getElementById('canvas-container');
+        const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^";
+        const characters = "0101010101ABCDEF";
         const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
 
-        function draw() {
-            ctx.fillStyle = "rgba(10, 11, 16, 0.05)";
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(5, 5, 5, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "#00f2ff";
             ctx.font = fontSize + "px monospace";
 
             for (let i = 0; i < drops.length; i++) {
-                const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(draw, 33);
+        setInterval(drawMatrix, 35);
 
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
